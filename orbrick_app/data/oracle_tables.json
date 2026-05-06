@@ -1,0 +1,3164 @@
+{
+  "PER_ALL_PEOPLE_F": {
+    "description": "Date-effective table storing core personal data for all persons (employees, contractors, applicants). Use EFFECTIVE_START_DATE/END_DATE filters.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Person",
+    "primary_key": [
+      "PERSON_ID",
+      "EFFECTIVE_START_DATE",
+      "EFFECTIVE_END_DATE"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "PERSON_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Surrogate key for person"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Date-effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Date-effectivity end (4712-12-31 = open)"
+      },
+      "PERSON_NUMBER": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "User-visible person number"
+      },
+      "START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Person hire/start date"
+      },
+      "DATE_OF_BIRTH": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Date of birth"
+      },
+      "COUNTRY_OF_BIRTH": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Country of birth"
+      },
+      "DATE_OF_DEATH": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Date of death"
+      },
+      "BLOOD_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Blood type lookup"
+      },
+      "NATIONALITY": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Nationality"
+      },
+      "LEGISLATION_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Legislation/country code"
+      },
+      "MARITAL_STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Marital status lookup"
+      },
+      "MARITAL_STATUS_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Date of marital status change"
+      },
+      "BACKGROUND_CHECK_STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Background check status"
+      },
+      "REHIRE_REASON": {
+        "type": "VARCHAR2(4000)",
+        "nullable": true,
+        "desc": "Reason for rehire"
+      },
+      "REHIRE_RECOMMENDATION": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Rehire recommendation"
+      },
+      "PROJECTED_TERMINATION_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Projected termination date"
+      },
+      "CREATED_BY": {
+        "type": "VARCHAR2(64)",
+        "nullable": false,
+        "desc": "Row created by"
+      },
+      "CREATION_DATE": {
+        "type": "TIMESTAMP",
+        "nullable": false,
+        "desc": "Row creation timestamp"
+      },
+      "LAST_UPDATED_BY": {
+        "type": "VARCHAR2(64)",
+        "nullable": false,
+        "desc": "Row last updated by"
+      },
+      "LAST_UPDATE_DATE": {
+        "type": "TIMESTAMP",
+        "nullable": false,
+        "desc": "Row last update timestamp"
+      },
+      "OBJECT_VERSION_NUMBER": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Row version for OCC"
+      }
+    }
+  },
+  "PER_PERSON_NAMES_F": {
+    "description": "Date-effective person names. Use NAME_TYPE='GLOBAL' for the primary display name. Contains full and split name components.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Person",
+    "primary_key": [
+      "PERSON_NAME_ID",
+      "EFFECTIVE_START_DATE",
+      "EFFECTIVE_END_DATE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "PERSON_ID"
+        ],
+        "ref_table": "PER_ALL_PEOPLE_F",
+        "ref_columns": [
+          "PERSON_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "PERSON_NAME_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Surrogate PK"
+      },
+      "PERSON_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PER_ALL_PEOPLE_F"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "NAME_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "GLOBAL=primary display name"
+      },
+      "LEGISLATION_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Legislation context"
+      },
+      "FIRST_NAME": {
+        "type": "VARCHAR2(150)",
+        "nullable": true,
+        "desc": "First/given name"
+      },
+      "MIDDLE_NAMES": {
+        "type": "VARCHAR2(60)",
+        "nullable": true,
+        "desc": "Middle name(s)"
+      },
+      "LAST_NAME": {
+        "type": "VARCHAR2(150)",
+        "nullable": false,
+        "desc": "Last/family name"
+      },
+      "SUFFIX": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Name suffix (Jr, Sr)"
+      },
+      "PRE_NAME_ADJUNCT": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Title (Mr, Mrs, Dr)"
+      },
+      "FULL_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": true,
+        "desc": "Concatenated full name"
+      },
+      "DISPLAY_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": true,
+        "desc": "Display name"
+      },
+      "ORDER_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": true,
+        "desc": "Sort name (Last, First)"
+      },
+      "LIST_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": true,
+        "desc": "List format name"
+      },
+      "KNOWN_AS": {
+        "type": "VARCHAR2(80)",
+        "nullable": true,
+        "desc": "Preferred name"
+      },
+      "HONORS": {
+        "type": "VARCHAR2(45)",
+        "nullable": true,
+        "desc": "Honors (PhD, MD)"
+      }
+    }
+  },
+  "PER_PERSON_NAMES_F_V": {
+    "description": "View on PER_PERSON_NAMES_F. Most commonly used for name queries.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Person",
+    "primary_key": [
+      "PERSON_ID",
+      "NAME_TYPE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "PERSON_ID"
+        ],
+        "ref_table": "PER_ALL_PEOPLE_F",
+        "ref_columns": [
+          "PERSON_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "PERSON_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PER_ALL_PEOPLE_F"
+      },
+      "NAME_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "GLOBAL for primary name"
+      },
+      "FULL_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": true,
+        "desc": "Full display name"
+      },
+      "FIRST_NAME": {
+        "type": "VARCHAR2(150)",
+        "nullable": true,
+        "desc": "First name"
+      },
+      "LAST_NAME": {
+        "type": "VARCHAR2(150)",
+        "nullable": false,
+        "desc": "Last name"
+      },
+      "DISPLAY_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": true,
+        "desc": "Display name"
+      },
+      "LIST_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": true,
+        "desc": "List format name"
+      },
+      "KNOWN_AS": {
+        "type": "VARCHAR2(80)",
+        "nullable": true,
+        "desc": "Preferred/known as name"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      }
+    }
+  },
+  "PER_ALL_ASSIGNMENTS_M": {
+    "description": "Assignment master table. Stores employee and worker assignment details (position, job, grade, org). Date-effective.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Assignment",
+    "primary_key": [
+      "ASSIGNMENT_ID",
+      "EFFECTIVE_START_DATE",
+      "EFFECTIVE_END_DATE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "PERSON_ID"
+        ],
+        "ref_table": "PER_ALL_PEOPLE_F",
+        "ref_columns": [
+          "PERSON_ID"
+        ]
+      },
+      {
+        "columns": [
+          "ORGANIZATION_ID"
+        ],
+        "ref_table": "HR_ALL_ORGANIZATION_UNITS_F",
+        "ref_columns": [
+          "ORGANIZATION_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "ASSIGNMENT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Assignment surrogate PK"
+      },
+      "PERSON_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PER_ALL_PEOPLE_F"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "ASSIGNMENT_NUMBER": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "User-visible assignment number"
+      },
+      "ASSIGNMENT_NAME": {
+        "type": "VARCHAR2(80)",
+        "nullable": true,
+        "desc": "Assignment name"
+      },
+      "ASSIGNMENT_TYPE": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "E=Employee C=CWK A=Applicant"
+      },
+      "ASSIGNMENT_STATUS_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "ACTIVE, INACTIVE, SUSPENDED"
+      },
+      "SYSTEM_PERSON_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "EMP, CWK, EX_EMP etc"
+      },
+      "PRIMARY_FLAG": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Y=Primary assignment"
+      },
+      "EMPLOYMENT_CATEGORY": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "FR=Full Time PT=Part Time"
+      },
+      "ORGANIZATION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Department/Org FK"
+      },
+      "JOB_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Job FK"
+      },
+      "POSITION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Position FK"
+      },
+      "GRADE_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Grade FK"
+      },
+      "LOCATION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Location FK"
+      },
+      "BUSINESS_UNIT_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Business Unit FK"
+      },
+      "LEGAL_ENTITY_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Legal Employer FK"
+      },
+      "PERIOD_OF_SERVICE_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Period of service FK"
+      },
+      "PAYROLL_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Payroll FK"
+      },
+      "NORMAL_HOURS": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Normal working hours"
+      },
+      "FREQUENCY": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Hour frequency (W=Weekly)"
+      },
+      "MANAGER_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Manager person ID"
+      },
+      "PERSON_TYPE_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Person type FK"
+      },
+      "OBJECT_VERSION_NUMBER": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "OCC version number"
+      }
+    }
+  },
+  "PER_ALL_ASSIGNMENTS_F": {
+    "description": "Alternative date-effective assignment view. PER_ALL_ASSIGNMENTS_M is preferred for most queries.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Assignment",
+    "primary_key": [
+      "ASSIGNMENT_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "PERSON_ID"
+        ],
+        "ref_table": "PER_ALL_PEOPLE_F",
+        "ref_columns": [
+          "PERSON_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "ASSIGNMENT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Assignment PK"
+      },
+      "PERSON_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PER_ALL_PEOPLE_F"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "ASSIGNMENT_NUMBER": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Assignment number"
+      },
+      "ASSIGNMENT_TYPE": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "E/C/A/N"
+      },
+      "PRIMARY_FLAG": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Primary flag"
+      },
+      "ORGANIZATION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Organisation FK"
+      },
+      "JOB_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Job FK"
+      },
+      "GRADE_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Grade FK"
+      },
+      "PAYROLL_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Payroll FK"
+      },
+      "LEGAL_ENTITY_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Legal employer FK"
+      }
+    }
+  },
+  "HR_ALL_ORGANIZATION_UNITS_F": {
+    "description": "Date-effective organization units (departments, divisions, legal entities). Filter by TYPE for specific org types.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Organisation",
+    "primary_key": [
+      "ORGANIZATION_ID",
+      "EFFECTIVE_START_DATE",
+      "EFFECTIVE_END_DATE"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "ORGANIZATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Organisation surrogate PK"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "LE=Legal Employer DEPT=Department"
+      },
+      "INTERNAL_EXTERNAL_FLAG": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "INT=Internal EXT=External"
+      },
+      "LOCATION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Default location FK"
+      },
+      "OBJECT_VERSION_NUMBER": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "OCC version"
+      }
+    }
+  },
+  "HR_ORGANIZATION_UNITS_F_TL": {
+    "description": "Translation table for HR_ALL_ORGANIZATION_UNITS_F. Contains organisation names.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Organisation",
+    "primary_key": [
+      "ORGANIZATION_ID",
+      "EFFECTIVE_START_DATE",
+      "LANGUAGE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "ORGANIZATION_ID"
+        ],
+        "ref_table": "HR_ALL_ORGANIZATION_UNITS_F",
+        "ref_columns": [
+          "ORGANIZATION_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "ORGANIZATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to HR_ALL_ORGANIZATION_UNITS_F"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "LANGUAGE": {
+        "type": "VARCHAR2(4)",
+        "nullable": false,
+        "desc": "Language code (US=English)"
+      },
+      "SOURCE_LANG": {
+        "type": "VARCHAR2(4)",
+        "nullable": false,
+        "desc": "Source language"
+      },
+      "NAME": {
+        "type": "VARCHAR2(240)",
+        "nullable": false,
+        "desc": "Organisation name"
+      }
+    }
+  },
+  "PER_JOBS_F": {
+    "description": "Date-effective jobs table. Stores job definitions.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Job",
+    "primary_key": [
+      "JOB_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "JOB_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Job surrogate PK"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "JOB_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Job code"
+      },
+      "ACTIVE_STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "A=Active I=Inactive"
+      },
+      "MANAGER_LEVEL": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Manager level"
+      },
+      "JOB_FAMILY_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Job family FK"
+      }
+    }
+  },
+  "PER_JOBS_F_TL": {
+    "description": "Translation table for PER_JOBS_F. Contains job names and descriptions.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Job",
+    "primary_key": [
+      "JOB_ID",
+      "EFFECTIVE_START_DATE",
+      "LANGUAGE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "JOB_ID"
+        ],
+        "ref_table": "PER_JOBS_F",
+        "ref_columns": [
+          "JOB_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "JOB_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PER_JOBS_F"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "LANGUAGE": {
+        "type": "VARCHAR2(4)",
+        "nullable": false,
+        "desc": "Language code"
+      },
+      "NAME": {
+        "type": "VARCHAR2(240)",
+        "nullable": false,
+        "desc": "Job name"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(2000)",
+        "nullable": true,
+        "desc": "Job description"
+      }
+    }
+  },
+  "HR_ALL_POSITIONS_F": {
+    "description": "Date-effective positions. Positions are specific roles within an organisation.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Position",
+    "primary_key": [
+      "POSITION_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "ORGANIZATION_ID"
+        ],
+        "ref_table": "HR_ALL_ORGANIZATION_UNITS_F",
+        "ref_columns": [
+          "ORGANIZATION_ID"
+        ]
+      },
+      {
+        "columns": [
+          "JOB_ID"
+        ],
+        "ref_table": "PER_JOBS_F",
+        "ref_columns": [
+          "JOB_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "POSITION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Position surrogate PK"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "POSITION_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Position code"
+      },
+      "ORGANIZATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Organisation FK"
+      },
+      "JOB_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Job FK"
+      },
+      "LOCATION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Location FK"
+      },
+      "ACTIVE_STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "A=Active I=Inactive"
+      },
+      "POSITION_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "SINGLE_INCUMBENT etc"
+      },
+      "REGULAR_TEMPORARY": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "R=Regular T=Temporary"
+      },
+      "FULL_PART_TIME": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "FT=Full Time PT=Part Time"
+      }
+    }
+  },
+  "HR_ALL_POSITIONS_F_TL": {
+    "description": "Translation table for HR_ALL_POSITIONS_F. Contains position names.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Position",
+    "primary_key": [
+      "POSITION_ID",
+      "EFFECTIVE_START_DATE",
+      "LANGUAGE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "POSITION_ID"
+        ],
+        "ref_table": "HR_ALL_POSITIONS_F",
+        "ref_columns": [
+          "POSITION_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "POSITION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to HR_ALL_POSITIONS_F"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "LANGUAGE": {
+        "type": "VARCHAR2(4)",
+        "nullable": false,
+        "desc": "Language code"
+      },
+      "NAME": {
+        "type": "VARCHAR2(240)",
+        "nullable": false,
+        "desc": "Position name"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(2000)",
+        "nullable": true,
+        "desc": "Position description"
+      }
+    }
+  },
+  "PAY_ALL_PAYROLLS_F": {
+    "description": "Date-effective payroll definitions.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "PAYROLL_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "PAYROLL_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Payroll surrogate PK"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "PAYROLL_NAME": {
+        "type": "VARCHAR2(80)",
+        "nullable": false,
+        "desc": "Payroll name"
+      },
+      "PERIOD_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "MONTHLY, BIWEEKLY etc"
+      },
+      "FIRST_PERIOD_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "First pay period end date"
+      },
+      "CUT_OFF_DATE_OFFSET": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Cut-off date offset days"
+      },
+      "PAYSLIP_VIEW_DATE_OFFSET": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Payslip view date offset"
+      },
+      "PAYROLL_STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Active/Inactive"
+      }
+    }
+  },
+  "PAY_PAYROLL_ACTIONS": {
+    "description": "Payroll processing actions (runs, prepayments, etc.). Each row is one payroll action.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "PAYROLL_ACTION_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "PAYROLL_ID"
+        ],
+        "ref_table": "PAY_ALL_PAYROLLS_F",
+        "ref_columns": [
+          "PAYROLL_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "PAYROLL_ACTION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Action surrogate PK"
+      },
+      "ACTION_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "R=Run Q=Prepayment B=Balance"
+      },
+      "PAYROLL_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_ALL_PAYROLLS_F"
+      },
+      "EFFECTIVE_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Payroll run effective date"
+      },
+      "DATE_EARNED": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Date earnings were earned"
+      },
+      "ACTION_STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "C=Complete E=Error U=Unprocessed"
+      },
+      "DISPLAY_RUN_NUMBER": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "User-visible run number"
+      },
+      "OBJECT_VERSION_NUMBER": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "OCC version"
+      }
+    }
+  },
+  "PAY_ASSIGNMENT_ACTIONS": {
+    "description": "Assignment-level payroll actions. Child of PAY_PAYROLL_ACTIONS.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "ASSIGNMENT_ACTION_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "PAYROLL_ACTION_ID"
+        ],
+        "ref_table": "PAY_PAYROLL_ACTIONS",
+        "ref_columns": [
+          "PAYROLL_ACTION_ID"
+        ]
+      },
+      {
+        "columns": [
+          "ASSIGNMENT_ID"
+        ],
+        "ref_table": "PER_ALL_ASSIGNMENTS_M",
+        "ref_columns": [
+          "ASSIGNMENT_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "ASSIGNMENT_ACTION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Assignment action PK"
+      },
+      "PAYROLL_ACTION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_PAYROLL_ACTIONS"
+      },
+      "ASSIGNMENT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PER_ALL_ASSIGNMENTS_M"
+      },
+      "ACTION_STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "C=Complete E=Error"
+      },
+      "ACTION_SEQUENCE": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Processing sequence"
+      },
+      "CHUNK_NUMBER": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Processing chunk"
+      }
+    }
+  },
+  "PAY_RUN_RESULTS": {
+    "description": "Payroll run results by element. One row per element per assignment action.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "RUN_RESULT_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "ASSIGNMENT_ACTION_ID"
+        ],
+        "ref_table": "PAY_ASSIGNMENT_ACTIONS",
+        "ref_columns": [
+          "ASSIGNMENT_ACTION_ID"
+        ]
+      },
+      {
+        "columns": [
+          "ELEMENT_TYPE_ID"
+        ],
+        "ref_table": "PAY_ELEMENT_TYPES_F",
+        "ref_columns": [
+          "ELEMENT_TYPE_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "RUN_RESULT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Run result PK"
+      },
+      "ASSIGNMENT_ACTION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_ASSIGNMENT_ACTIONS"
+      },
+      "ELEMENT_TYPE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_ELEMENT_TYPES_F"
+      },
+      "STATUS": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "P=Processed U=Unprocessed"
+      },
+      "SOURCE_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Source of the run result"
+      },
+      "START_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Element start date"
+      },
+      "END_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Element end date"
+      },
+      "ENTRY_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Entry type"
+      }
+    }
+  },
+  "PAY_RUN_RESULT_VALUES": {
+    "description": "Input values for each payroll run result. Join to PAY_INPUT_VALUES_F for value names.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "RUN_RESULT_VALUE_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "RUN_RESULT_ID"
+        ],
+        "ref_table": "PAY_RUN_RESULTS",
+        "ref_columns": [
+          "RUN_RESULT_ID"
+        ]
+      },
+      {
+        "columns": [
+          "INPUT_VALUE_ID"
+        ],
+        "ref_table": "PAY_INPUT_VALUES_F",
+        "ref_columns": [
+          "INPUT_VALUE_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "RUN_RESULT_VALUE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "PK"
+      },
+      "RUN_RESULT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_RUN_RESULTS"
+      },
+      "INPUT_VALUE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_INPUT_VALUES_F"
+      },
+      "RESULT_VALUE": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "The actual amount/value"
+      }
+    }
+  },
+  "PAY_ELEMENT_TYPES_F": {
+    "description": "Date-effective payroll element definitions (Basic Salary, HRA, Bonus etc).",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "ELEMENT_TYPE_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "ELEMENT_TYPE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Element type PK"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "ELEMENT_NAME": {
+        "type": "VARCHAR2(80)",
+        "nullable": false,
+        "desc": "Element name (e.g. Basic Salary)"
+      },
+      "REPORTING_NAME": {
+        "type": "VARCHAR2(80)",
+        "nullable": true,
+        "desc": "Report display name"
+      },
+      "CLASSIFICATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Element classification FK"
+      },
+      "PROCESSING_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "R=Recurring N=Non-Recurring"
+      },
+      "CATEGORY": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Absence/Standard etc"
+      },
+      "POST_TERMINATION_RULE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Processing after termination"
+      },
+      "ADDITIONAL_ENTRY_ALLOWED_FLAG": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Multiple entries allowed"
+      },
+      "LEGISLATION_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Country code"
+      }
+    }
+  },
+  "PAY_INPUT_VALUES_F": {
+    "description": "Input value definitions for payroll elements. Each element has one or more input values (Amount, Hours, Rate etc).",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "INPUT_VALUE_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "ELEMENT_TYPE_ID"
+        ],
+        "ref_table": "PAY_ELEMENT_TYPES_F",
+        "ref_columns": [
+          "ELEMENT_TYPE_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "INPUT_VALUE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Input value PK"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "ELEMENT_TYPE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_ELEMENT_TYPES_F"
+      },
+      "NAME": {
+        "type": "VARCHAR2(80)",
+        "nullable": false,
+        "desc": "Input value name (Amount, Hours, Rate)"
+      },
+      "UOM": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Unit: M=Money H=Hours N=Number"
+      },
+      "DEFAULT_VALUE": {
+        "type": "VARCHAR2(60)",
+        "nullable": true,
+        "desc": "Default value"
+      },
+      "LEGISLATION_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Country code"
+      },
+      "MANDATORY_FLAG": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Y=Mandatory"
+      }
+    }
+  },
+  "PAY_ELEMENT_ENTRIES_F": {
+    "description": "Element entry assignments \u00e2\u20ac\u201d which elements are assigned to which people.",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "ELEMENT_ENTRY_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "ASSIGNMENT_ID"
+        ],
+        "ref_table": "PER_ALL_ASSIGNMENTS_M",
+        "ref_columns": [
+          "ASSIGNMENT_ID"
+        ]
+      },
+      {
+        "columns": [
+          "ELEMENT_TYPE_ID"
+        ],
+        "ref_table": "PAY_ELEMENT_TYPES_F",
+        "ref_columns": [
+          "ELEMENT_TYPE_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "ELEMENT_ENTRY_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Element entry PK"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "ASSIGNMENT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to assignment"
+      },
+      "ELEMENT_TYPE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to element type"
+      },
+      "ENTRY_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "E=Regular S=Override A=Additional"
+      },
+      "CREATOR_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "F=FlexField SP=Salary Proposal"
+      }
+    }
+  },
+  "PAY_ELEMENT_ENTRY_VALUES_F": {
+    "description": "Actual input values for element entries (e.g. the salary amount).",
+    "schema": "FUSION",
+    "module": "HCM",
+    "category": "Payroll",
+    "primary_key": [
+      "ELEMENT_ENTRY_VALUE_ID",
+      "EFFECTIVE_START_DATE"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "ELEMENT_ENTRY_ID"
+        ],
+        "ref_table": "PAY_ELEMENT_ENTRIES_F",
+        "ref_columns": [
+          "ELEMENT_ENTRY_ID"
+        ]
+      },
+      {
+        "columns": [
+          "INPUT_VALUE_ID"
+        ],
+        "ref_table": "PAY_INPUT_VALUES_F",
+        "ref_columns": [
+          "INPUT_VALUE_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "ELEMENT_ENTRY_VALUE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "PK"
+      },
+      "ELEMENT_ENTRY_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_ELEMENT_ENTRIES_F"
+      },
+      "EFFECTIVE_START_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity start"
+      },
+      "EFFECTIVE_END_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Effectivity end"
+      },
+      "INPUT_VALUE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to PAY_INPUT_VALUES_F"
+      },
+      "SCREEN_ENTRY_VALUE": {
+        "type": "VARCHAR2(60)",
+        "nullable": true,
+        "desc": "The actual entered value/amount"
+      }
+    }
+  },
+  "GL_JE_HEADERS": {
+    "description": "General Ledger journal entry headers. Each header is one journal batch line. Join to GL_JE_LINES for detail.",
+    "schema": "GL",
+    "module": "GL",
+    "category": "Journal",
+    "primary_key": [
+      "JE_HEADER_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "LEDGER_ID"
+        ],
+        "ref_table": "GL_LEDGERS",
+        "ref_columns": [
+          "LEDGER_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "JE_HEADER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Journal header surrogate PK"
+      },
+      "LEDGER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to GL_LEDGERS"
+      },
+      "JE_BATCH_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Journal batch FK"
+      },
+      "JE_CATEGORY": {
+        "type": "VARCHAR2(25)",
+        "nullable": false,
+        "desc": "Journal category code"
+      },
+      "JE_SOURCE": {
+        "type": "VARCHAR2(25)",
+        "nullable": false,
+        "desc": "Source (Payables, Receivables, Manual)"
+      },
+      "PERIOD_NAME": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Accounting period name"
+      },
+      "NAME": {
+        "type": "VARCHAR2(100)",
+        "nullable": false,
+        "desc": "Journal entry name"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Journal description"
+      },
+      "STATUS": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "U=Unposted P=Posted"
+      },
+      "ACTUAL_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "A=Actual B=Budget E=Encumbrance"
+      },
+      "CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Journal currency"
+      },
+      "DEFAULT_EFFECTIVE_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Default GL date for lines"
+      },
+      "POSTED_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Date journal was posted"
+      },
+      "DATE_CREATED": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Journal creation date"
+      },
+      "RUNNING_TOTAL_DR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Running debit total (entered)"
+      },
+      "RUNNING_TOTAL_CR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Running credit total (entered)"
+      },
+      "RUNNING_TOTAL_ACCOUNTED_DR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Running accounted debit"
+      },
+      "RUNNING_TOTAL_ACCOUNTED_CR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Running accounted credit"
+      },
+      "REVERSED_JE_HEADER_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Reversed journal header FK"
+      },
+      "ACCRUAL_REV_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": true,
+        "desc": "Accrual reversal flag"
+      },
+      "DOC_SEQUENCE_VALUE": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Document sequence number"
+      },
+      "CONTROL_TOTAL": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Control total"
+      }
+    }
+  },
+  "GL_JE_LINES": {
+    "description": "General Ledger journal entry lines. Links to GL_CODE_COMBINATIONS for account and to GL_IMPORT_REFERENCES for SLA.",
+    "schema": "GL",
+    "module": "GL",
+    "category": "Journal",
+    "primary_key": [
+      "JE_HEADER_ID",
+      "JE_LINE_NUM"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "JE_HEADER_ID"
+        ],
+        "ref_table": "GL_JE_HEADERS",
+        "ref_columns": [
+          "JE_HEADER_ID"
+        ]
+      },
+      {
+        "columns": [
+          "CODE_COMBINATION_ID"
+        ],
+        "ref_table": "GL_CODE_COMBINATIONS",
+        "ref_columns": [
+          "CODE_COMBINATION_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "JE_HEADER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to GL_JE_HEADERS"
+      },
+      "JE_LINE_NUM": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Line number within header"
+      },
+      "LEDGER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to GL_LEDGERS"
+      },
+      "CODE_COMBINATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to GL_CODE_COMBINATIONS"
+      },
+      "PERIOD_NAME": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Accounting period"
+      },
+      "EFFECTIVE_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Line GL date"
+      },
+      "STATUS": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "U=Unposted P=Posted"
+      },
+      "ACCOUNTED_DR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Accounted debit (functional currency)"
+      },
+      "ACCOUNTED_CR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Accounted credit (functional currency)"
+      },
+      "ENTERED_DR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Entered debit (transaction currency)"
+      },
+      "ENTERED_CR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Entered credit (transaction currency)"
+      },
+      "CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Transaction currency"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Line description"
+      },
+      "STAT_AMOUNT": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Statistical amount"
+      },
+      "REFERENCE_1": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Reference field 1"
+      },
+      "REFERENCE_2": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Reference field 2"
+      },
+      "GL_SL_LINK_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "SLA link ID \u00e2\u20ac\u201d used via GL_IMPORT_REFERENCES"
+      },
+      "GL_SL_LINK_TABLE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "SLA link table name"
+      }
+    }
+  },
+  "GL_IMPORT_REFERENCES": {
+    "description": "CRITICAL link table between GL_JE_LINES and XLA_AE_LINES (SLA). Required for GL-to-subledger joins.",
+    "schema": "GL",
+    "module": "GL",
+    "category": "Journal",
+    "primary_key": [
+      "JE_BATCH_ID",
+      "JE_HEADER_ID",
+      "JE_LINE_NUM"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "JE_HEADER_ID",
+          "JE_LINE_NUM"
+        ],
+        "ref_table": "GL_JE_LINES",
+        "ref_columns": [
+          "JE_HEADER_ID",
+          "JE_LINE_NUM"
+        ]
+      },
+      {
+        "columns": [
+          "GL_SL_LINK_ID",
+          "GL_SL_LINK_TABLE"
+        ],
+        "ref_table": "XLA_AE_LINES",
+        "ref_columns": [
+          "GL_SL_LINK_ID",
+          "GL_SL_LINK_TABLE"
+        ]
+      }
+    ],
+    "columns": {
+      "JE_BATCH_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Journal batch ID"
+      },
+      "JE_HEADER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to GL_JE_LINES"
+      },
+      "JE_LINE_NUM": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to GL_JE_LINES"
+      },
+      "GL_SL_LINK_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Links to XLA_AE_LINES.GL_SL_LINK_ID"
+      },
+      "GL_SL_LINK_TABLE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "XLA link table (XLA_AE_LINES)"
+      },
+      "REFERENCE_1": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Subledger reference 1"
+      },
+      "REFERENCE_2": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Subledger reference 2"
+      },
+      "REFERENCE_3": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Subledger reference 3"
+      },
+      "REFERENCE_4": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Subledger reference 4"
+      },
+      "REFERENCE_5": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Subledger reference 5"
+      },
+      "ORIGINATING_TRANSACTION_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Source transaction date"
+      }
+    }
+  },
+  "GL_CODE_COMBINATIONS": {
+    "description": "Account code combinations for the Chart of Accounts. SEGMENT1-7 hold the account segments.",
+    "schema": "GL",
+    "module": "GL",
+    "category": "COA",
+    "primary_key": [
+      "CODE_COMBINATION_ID"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "CODE_COMBINATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "CCID surrogate PK"
+      },
+      "CHART_OF_ACCOUNTS_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Chart of accounts FK"
+      },
+      "LEDGER_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Ledger FK"
+      },
+      "SEGMENT1": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Company/Entity segment"
+      },
+      "SEGMENT2": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Cost Center segment"
+      },
+      "SEGMENT3": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Natural Account segment"
+      },
+      "SEGMENT4": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Sub-Account segment"
+      },
+      "SEGMENT5": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Product/Project segment"
+      },
+      "SEGMENT6": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Future use segment 6"
+      },
+      "SEGMENT7": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Future use segment 7"
+      },
+      "ACCOUNT_TYPE": {
+        "type": "VARCHAR2(1)",
+        "nullable": true,
+        "desc": "A=Asset L=Liability O=Equity R=Revenue E=Expense"
+      },
+      "ENABLED_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "Y=Enabled N=Disabled"
+      },
+      "SUMMARY_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "Y=Summary parent account"
+      },
+      "START_DATE_ACTIVE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Account active from date"
+      },
+      "END_DATE_ACTIVE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Account active to date"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Account description"
+      }
+    }
+  },
+  "GL_LEDGERS": {
+    "description": "Ledger definitions. Each Oracle Fusion ledger has one row.",
+    "schema": "GL",
+    "module": "GL",
+    "category": "Ledger",
+    "primary_key": [
+      "LEDGER_ID"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "LEDGER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Ledger surrogate PK"
+      },
+      "NAME": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Ledger name"
+      },
+      "SHORT_NAME": {
+        "type": "VARCHAR2(20)",
+        "nullable": false,
+        "desc": "Ledger short name"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Ledger description"
+      },
+      "LEDGER_CATEGORY_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "PRIMARY, SECONDARY, ALC"
+      },
+      "CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Functional currency"
+      },
+      "PERIOD_SET_NAME": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Accounting calendar"
+      },
+      "CHART_OF_ACCOUNTS_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Chart of accounts FK"
+      },
+      "ACCOUNTED_PERIOD_TYPE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Month/Quarter/Year"
+      },
+      "OBJECT_TYPE_CODE": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "L=Ledger S=Ledger Set"
+      },
+      "FIRST_LEDGER_PERIOD_NAME": {
+        "type": "VARCHAR2(15)",
+        "nullable": true,
+        "desc": "First open period"
+      },
+      "ENABLE_BUDGETARY_CONTROL_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "Y=Budgetary control on"
+      },
+      "ENABLE_JE_APPROVAL_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "Y=Journal approval required"
+      },
+      "CONSOLIDATION_LEDGER_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "Y=Consolidation ledger"
+      }
+    }
+  },
+  "XLA_AE_HEADERS": {
+    "description": "Subledger Accounting (SLA) journal entry headers. Links to GL via XLA_AE_LINES.GL_SL_LINK_ID \u00e2\u2020\u2019 GL_IMPORT_REFERENCES.",
+    "schema": "XLA",
+    "module": "SLA",
+    "category": "Subledger",
+    "primary_key": [
+      "AE_HEADER_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "LEDGER_ID"
+        ],
+        "ref_table": "GL_LEDGERS",
+        "ref_columns": [
+          "LEDGER_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "AE_HEADER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "SLA header PK"
+      },
+      "APPLICATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Application ID (200=AP 222=AR)"
+      },
+      "LEDGER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to GL_LEDGERS"
+      },
+      "ENTITY_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to XLA_TRANSACTION_ENTITIES"
+      },
+      "EVENT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Accounting event ID"
+      },
+      "ACCOUNTING_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "SLA accounting date"
+      },
+      "PERIOD_NAME": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Accounting period"
+      },
+      "ACCOUNTING_ENTRY_STATUS_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "FINAL=posted DRAFT=not yet"
+      },
+      "BALANCE_TYPE_CODE": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "A=Actual B=Budget E=Encumbrance"
+      },
+      "JE_CATEGORY_NAME": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Journal category"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "SLA header description"
+      },
+      "EVENT_TYPE_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Accounting event type"
+      },
+      "DOC_SEQUENCE_VALUE": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Document sequence"
+      },
+      "GL_TRANSFER_STATUS_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "N=Not Xferred Y=Transferred"
+      },
+      "GL_TRANSFER_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Date transferred to GL"
+      }
+    }
+  },
+  "XLA_AE_LINES": {
+    "description": "SLA journal entry lines. GL_SL_LINK_ID links back to GL_IMPORT_REFERENCES and GL_JE_LINES.",
+    "schema": "XLA",
+    "module": "SLA",
+    "category": "Subledger",
+    "primary_key": [
+      "AE_HEADER_ID",
+      "AE_LINE_NUM"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "AE_HEADER_ID"
+        ],
+        "ref_table": "XLA_AE_HEADERS",
+        "ref_columns": [
+          "AE_HEADER_ID"
+        ]
+      },
+      {
+        "columns": [
+          "CODE_COMBINATION_ID"
+        ],
+        "ref_table": "GL_CODE_COMBINATIONS",
+        "ref_columns": [
+          "CODE_COMBINATION_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "AE_HEADER_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to XLA_AE_HEADERS"
+      },
+      "AE_LINE_NUM": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Line number"
+      },
+      "APPLICATION_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Application ID"
+      },
+      "CODE_COMBINATION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "FK to GL_CODE_COMBINATIONS"
+      },
+      "GL_SL_LINK_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Links to GL_IMPORT_REFERENCES.GL_SL_LINK_ID"
+      },
+      "GL_SL_LINK_TABLE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "XLA_AE_LINES"
+      },
+      "CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Transaction currency"
+      },
+      "ACCOUNTING_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Line accounting date"
+      },
+      "ENTERED_DR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Entered debit"
+      },
+      "ENTERED_CR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Entered credit"
+      },
+      "ACCOUNTED_DR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Accounted debit"
+      },
+      "ACCOUNTED_CR": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Accounted credit"
+      },
+      "ACCOUNTING_CLASS_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "ACCRUAL, CHARGE, LIABILITY etc"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(760)",
+        "nullable": true,
+        "desc": "Line description"
+      },
+      "PARTY_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Third party (supplier/customer)"
+      }
+    }
+  },
+  "AP_INVOICES_ALL": {
+    "description": "AP invoice headers. One row per invoice. Use CANCELLED_DATE IS NULL for active invoices.",
+    "schema": "AP",
+    "module": "AP",
+    "category": "Invoice",
+    "primary_key": [
+      "INVOICE_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "VENDOR_ID"
+        ],
+        "ref_table": "POZ_SUPPLIERS",
+        "ref_columns": [
+          "VENDOR_ID"
+        ]
+      },
+      {
+        "columns": [
+          "ORG_ID"
+        ],
+        "ref_table": "FUN_ALL_BUSINESS_UNITS_V",
+        "ref_columns": [
+          "BUSINESS_UNIT_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "INVOICE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Invoice surrogate PK"
+      },
+      "VENDOR_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to POZ_SUPPLIERS"
+      },
+      "VENDOR_SITE_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to POZ_SUPPLIER_SITES_ALL_M"
+      },
+      "ORG_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Business Unit FK"
+      },
+      "SET_OF_BOOKS_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Ledger ID FK"
+      },
+      "INVOICE_NUM": {
+        "type": "VARCHAR2(50)",
+        "nullable": false,
+        "desc": "Invoice number (supplier's)"
+      },
+      "INVOICE_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Invoice date"
+      },
+      "INVOICE_TYPE_LOOKUP_CODE": {
+        "type": "VARCHAR2(25)",
+        "nullable": false,
+        "desc": "STANDARD, CREDIT, PREPAYMENT"
+      },
+      "INVOICE_CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Invoice currency"
+      },
+      "INVOICE_AMOUNT": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Total invoice amount"
+      },
+      "AMOUNT_PAID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Total amount paid to date"
+      },
+      "PAYMENT_STATUS_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": true,
+        "desc": "Y=Fully paid P=Partial N=Unpaid"
+      },
+      "APPROVAL_STATUS": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "APPROVED, NEEDS REAPPROVAL"
+      },
+      "WFAPPROVAL_STATUS": {
+        "type": "VARCHAR2(50)",
+        "nullable": true,
+        "desc": "Workflow approval status"
+      },
+      "GL_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "GL accounting date"
+      },
+      "CANCELLED_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "NULL=active, Date=cancelled"
+      },
+      "CANCELLED_AMOUNT": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Cancelled amount"
+      },
+      "DESCRIPTION": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Invoice description"
+      },
+      "SOURCE": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Source system"
+      },
+      "VOUCHER_NUM": {
+        "type": "VARCHAR2(50)",
+        "nullable": true,
+        "desc": "Internal voucher number"
+      },
+      "TERMS_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Payment terms start date"
+      },
+      "PAYMENT_CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": true,
+        "desc": "Payment currency"
+      },
+      "BASE_AMOUNT": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Invoice amount in functional currency"
+      },
+      "EXCHANGE_RATE": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Exchange rate used"
+      },
+      "ACCTS_PAY_CODE_COMBINATION_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "AP liability GL account CCID"
+      }
+    }
+  },
+  "AP_CHECKS_ALL": {
+    "description": "AP payment (check/EFT/wire) headers. Each payment has one row.",
+    "schema": "AP",
+    "module": "AP",
+    "category": "Payment",
+    "primary_key": [
+      "CHECK_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "VENDOR_ID"
+        ],
+        "ref_table": "POZ_SUPPLIERS",
+        "ref_columns": [
+          "VENDOR_ID"
+        ]
+      },
+      {
+        "columns": [
+          "ORG_ID"
+        ],
+        "ref_table": "FUN_ALL_BUSINESS_UNITS_V",
+        "ref_columns": [
+          "BUSINESS_UNIT_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "CHECK_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Payment surrogate PK"
+      },
+      "VENDOR_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to POZ_SUPPLIERS"
+      },
+      "VENDOR_SITE_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "FK to supplier site"
+      },
+      "ORG_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Business Unit FK"
+      },
+      "CHECK_NUMBER": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Payment reference number"
+      },
+      "CHECK_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Payment date"
+      },
+      "CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Payment currency"
+      },
+      "AMOUNT": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Payment amount"
+      },
+      "BASE_AMOUNT": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Amount in functional currency"
+      },
+      "STATUS_LOOKUP_CODE": {
+        "type": "VARCHAR2(25)",
+        "nullable": false,
+        "desc": "CLEARED, NEGOTIABLE, VOIDED"
+      },
+      "PAYMENT_TYPE_FLAG": {
+        "type": "VARCHAR2(25)",
+        "nullable": true,
+        "desc": "Q=Quick R=Refund A=Manual"
+      },
+      "BANK_ACCOUNT_NAME": {
+        "type": "VARCHAR2(80)",
+        "nullable": true,
+        "desc": "Company bank account name"
+      },
+      "CHECKRUN_NAME": {
+        "type": "VARCHAR2(255)",
+        "nullable": true,
+        "desc": "Payment batch name"
+      },
+      "CLEARED_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Bank clearance date"
+      },
+      "CLEARED_AMOUNT": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Cleared amount"
+      },
+      "VOID_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Payment void date"
+      },
+      "EXTERNAL_BANK_ACCOUNT_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Supplier bank account FK"
+      }
+    }
+  },
+  "RA_CUSTOMER_TRX_ALL": {
+    "description": "AR customer transaction headers (invoices, credit memos, debit memos). Use COMPLETE_FLAG='Y' for posted.",
+    "schema": "AR",
+    "module": "AR",
+    "category": "Transaction",
+    "primary_key": [
+      "CUSTOMER_TRX_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "BILL_TO_CUSTOMER_ID"
+        ],
+        "ref_table": "HZ_CUST_ACCOUNTS",
+        "ref_columns": [
+          "CUST_ACCOUNT_ID"
+        ]
+      },
+      {
+        "columns": [
+          "ORG_ID"
+        ],
+        "ref_table": "FUN_ALL_BUSINESS_UNITS_V",
+        "ref_columns": [
+          "BUSINESS_UNIT_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "CUSTOMER_TRX_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Transaction surrogate PK"
+      },
+      "BILL_TO_CUSTOMER_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "FK to HZ_CUST_ACCOUNTS"
+      },
+      "BILL_TO_SITE_USE_ID": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "FK to HZ_CUST_SITE_USES_ALL"
+      },
+      "ORG_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Business Unit FK"
+      },
+      "SET_OF_BOOKS_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Ledger FK"
+      },
+      "TRX_NUMBER": {
+        "type": "VARCHAR2(20)",
+        "nullable": false,
+        "desc": "Transaction number"
+      },
+      "TRX_DATE": {
+        "type": "DATE",
+        "nullable": false,
+        "desc": "Transaction date"
+      },
+      "INVOICE_CURRENCY_CODE": {
+        "type": "VARCHAR2(15)",
+        "nullable": false,
+        "desc": "Transaction currency"
+      },
+      "COMPLETE_FLAG": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "Y=Complete N=Incomplete"
+      },
+      "EXCHANGE_RATE": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Exchange rate"
+      },
+      "EXCHANGE_RATE_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Exchange rate type"
+      },
+      "EXCHANGE_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Exchange rate date"
+      },
+      "DOC_SEQUENCE_VALUE": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Document number"
+      },
+      "COMMENTS": {
+        "type": "VARCHAR2(1760)",
+        "nullable": true,
+        "desc": "Comments"
+      },
+      "BILLING_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Billing date"
+      },
+      "DUE_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Payment due date"
+      }
+    }
+  },
+  "HZ_CUST_ACCOUNTS": {
+    "description": "TCA customer account master. Each customer can have multiple accounts. Join to HZ_PARTIES for name.",
+    "schema": "AR",
+    "module": "AR",
+    "category": "Customer",
+    "primary_key": [
+      "CUST_ACCOUNT_ID"
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "PARTY_ID"
+        ],
+        "ref_table": "HZ_PARTIES",
+        "ref_columns": [
+          "PARTY_ID"
+        ]
+      }
+    ],
+    "columns": {
+      "CUST_ACCOUNT_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Customer account surrogate PK"
+      },
+      "PARTY_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "FK to HZ_PARTIES"
+      },
+      "ACCOUNT_NUMBER": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Customer account number"
+      },
+      "ACCOUNT_NAME": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Account name"
+      },
+      "ACCOUNT_ESTABLISHED_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Account establishment date"
+      },
+      "ACCOUNT_TERMINATION_DATE": {
+        "type": "DATE",
+        "nullable": true,
+        "desc": "Account termination date"
+      },
+      "STATUS": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "A=Active I=Inactive"
+      },
+      "CUSTOMER_CLASS_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Customer classification"
+      },
+      "CUSTOMER_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "R=External I=Internal"
+      },
+      "CREDIT_LIMIT": {
+        "type": "NUMBER",
+        "nullable": true,
+        "desc": "Credit limit amount"
+      },
+      "TAX_CODE": {
+        "type": "VARCHAR2(50)",
+        "nullable": true,
+        "desc": "Tax code"
+      },
+      "ORIG_SYSTEM_REFERENCE": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Legacy system reference"
+      }
+    }
+  },
+  "HZ_PARTIES": {
+    "description": "TCA party master. All suppliers, customers, contacts are parties. PARTY_TYPE distinguishes them.",
+    "schema": "AR",
+    "module": "AR",
+    "category": "Customer",
+    "primary_key": [
+      "PARTY_ID"
+    ],
+    "foreign_keys": [],
+    "columns": {
+      "PARTY_ID": {
+        "type": "NUMBER",
+        "nullable": false,
+        "desc": "Party surrogate PK"
+      },
+      "PARTY_NUMBER": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "Party number"
+      },
+      "PARTY_NAME": {
+        "type": "VARCHAR2(360)",
+        "nullable": false,
+        "desc": "Party full name"
+      },
+      "PARTY_TYPE": {
+        "type": "VARCHAR2(30)",
+        "nullable": false,
+        "desc": "PERSON, ORGANIZATION, GROUP"
+      },
+      "STATUS": {
+        "type": "VARCHAR2(1)",
+        "nullable": false,
+        "desc": "A=Active I=Inactive"
+      },
+      "EMAIL_ADDRESS": {
+        "type": "VARCHAR2(2000)",
+        "nullable": true,
+        "desc": "Email address"
+      },
+      "ADDRESS1": {
+        "type": "VARCHAR2(240)",
+        "nullable": true,
+        "desc": "Address line 1"
+      },
+      "CITY": {
+        "type": "VARCHAR2(60)",
+        "nullable": true,
+        "desc": "City"
+      },
+      "STATE": {
+        "type": "VARCHAR2(60)",
+        "nullable": true,
+        "desc": "State or province"
+      },
+      "POSTAL_CODE": {
+        "type": "VARCHAR2(60)",
+        "nullable": true,
+        "desc": "Postal/ZIP code"
+      },
+      "COUNTRY": {
+        "type": "VARCHAR2(60)",
+        "nullable": true,
+        "desc": "Country code"
+      },
+      "CATEGORY_CODE": {
+        "type": "VARCHAR2(30)",
+        "nullable": true,
+        "desc": "Party category"
+      }
+    }
+  },
+  "IEX_DUNNINGS": {
+    "description": "",
+    "columns": {
+      "DUNNING_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "LAST_UPDATE_DATE": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "LAST_UPDATED_BY": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "CREATION_DATE": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "CREATED_BY": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "LAST_UPDATE_LOGIN": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "REQUEST_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "PROGRAM_NAME": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "PROGRAM_APP_NAME": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "PROGRAM_UPDATE_DATE": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "PARTY_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "CUST_ACCOUNT_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "SITE_USE_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "XML_REQUEST_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "XML_TEMPLATE_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "LETTER_NAME": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "STATUS": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "CALLBACK_YN": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "CALLBACK_DATE": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "DUNNING_METHOD": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "AMOUNT_DUE_REMAINING": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "CURRENCY_CODE": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "OBJECT_TYPE": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "OBJECT_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "DUNNING_LEVEL": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "FINANCIAL_CHARGE": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "INTEREST_AMT": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "DUNNING_PLAN_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "CONTACT_DESTINATION": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "CONTACT_PARTY_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "PARTY_LOCATION_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "DELIVERY_STATUS": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "PARENT_DUNNING_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_CATEGORY": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE1": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE2": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE3": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE4": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE5": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE6": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE7": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE8": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE9": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE10": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE11": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE12": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE13": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE14": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE15": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "SECURITY_GROUP_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "OBJECT_VERSION_NUMBER": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "BU_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "LOCALE": {
+        "type": "VARCHAR2",
+        "desc": ""
+      }
+    },
+    "primary_key": [],
+    "foreign_keys": [],
+    "source": "https://docs.oracle.com/en/cloud/saas/financials/26b/oedmf/iexdunnings-25782.html"
+  },
+  "CST_COST_INV_ORGS": {
+    "description": "",
+    "columns": {
+      "COST_ORG_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "MASTER_ORGANIZATION_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "INV_ORG_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "COST_INV_ORG_ID": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "OBJECT_VERSION_NUMBER": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "FROM_DATE": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "TO_DATE": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "CREATED_BY": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "CREATION_DATE": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "LAST_UPDATED_BY": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "LAST_UPDATE_DATE": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "LAST_UPDATE_LOGIN": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CATEGORY": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR1": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR2": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR3": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR4": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR5": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR6": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR7": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR8": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR9": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR10": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR11": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR12": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR13": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR14": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR15": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR16": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR17": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR18": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR19": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_CHAR20": {
+        "type": "VARCHAR2",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER1": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER2": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER3": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER4": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER5": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER6": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER7": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER8": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER9": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_NUMBER10": {
+        "type": "NUMBER",
+        "desc": ""
+      },
+      "ATTRIBUTE_DATE1": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "ATTRIBUTE_DATE2": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "ATTRIBUTE_DATE3": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "ATTRIBUTE_DATE4": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "ATTRIBUTE_DATE5": {
+        "type": "DATE",
+        "desc": ""
+      },
+      "ATTRIBUTE_TIMESTAMP1": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "ATTRIBUTE_TIMESTAMP2": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "ATTRIBUTE_TIMESTAMP3": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "ATTRIBUTE_TIMESTAMP4": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      },
+      "ATTRIBUTE_TIMESTAMP5": {
+        "type": "TIMESTAMP",
+        "desc": ""
+      }
+    },
+    "primary_key": [],
+    "foreign_keys": [],
+    "source": "https://docs.oracle.com/en/cloud/saas/supply-chain-and-manufacturing/25b/oedsc/cstcostinvorgs-20289.html"
+  }
+}
